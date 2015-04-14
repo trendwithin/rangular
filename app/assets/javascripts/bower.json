@@ -1,0 +1,16 @@
+{
+  "name": "javascripts",
+  "version": "0.0.0",
+  "homepage": "https://github.com/trendwithin/rangular",
+  "authors": [
+    "Michael Becco <e4e6d4d5@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
