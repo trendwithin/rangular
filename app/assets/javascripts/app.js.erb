@@ -1,6 +1,12 @@
-(function() {
-  var app = angular.module('store', [ ]);
+//= require directives
 
+(function() {
+  var app = angular.module('store', ['store-directives']);
+
+  app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] =
+    $('meta[name=csrf-token]').attr('content');
+  }])
   app.controller('StoreController', function() {
     this.products = gems;
   });
@@ -25,36 +31,6 @@
       this.review = {};
     };
   });
-
-  app.directive('productForm', function() {
-    return {
-      retrict: 'E',
-      templateUrl: '<%= asset_path "templates/product-form.html" %>',
-      controller:function(){
-
-      },
-      controllerAs: 'form'
-    }
-  });
-
-  app.directive('productTitle', function(){
-    return {
-      restrict: 'E',
-      templateUrl: '<%= asset_path "templates/product-title.html" %>'
-    };
-  });
-
-  app.directive('productPanels', function() {
-    return {
-      retrict: 'E',
-      templateUrl: '<%= asset_path "templates/product-panels.html" %>',
-      controller:function(){
-
-      },
-      controllerAs: 'panels'
-    }
-  });
-
 
   var gems = [
     {
