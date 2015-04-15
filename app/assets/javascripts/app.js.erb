@@ -29,7 +29,7 @@
   app.directive('productForm', function() {
     return {
       retrict: 'E',
-      templateUrl: 'product-form.html',
+      templateUrl: '<%= asset_path "templates/product-form.html" %>',
       controller:function(){
 
       },
@@ -40,14 +40,14 @@
   app.directive('productTitle', function(){
     return {
       restrict: 'E',
-      templateUrl: 'product-title.html'
+      templateUrl: '<%= asset_path "templates/product-title.html" %>'
     };
   });
 
   app.directive('productPanels', function() {
     return {
       retrict: 'E',
-      templateUrl: 'product-panels.html',
+      templateUrl: '<%= asset_path "templates/product-panels.html" %>',
       controller:function(){
 
       },
@@ -65,7 +65,7 @@
       soldOut: false,
       images: [
        {
-        full: 'ruby.jpeg',
+        full: '<%= asset_path "ruby.jpeg" %>'
        }
       ],
       reviews: [
