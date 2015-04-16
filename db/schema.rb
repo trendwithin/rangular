@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20150416003718) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "description"
-    t.boolean  "canpurchase"
-    t.boolean  "soldout"
+    t.boolean  "canPurchase"
+    t.boolean  "soldOut"
   end
 
 end

@@ -9,7 +9,7 @@
   }])
 
   app.controller('StoreController', [ '$http', '$scope', function($http, $scope) {
-    this.products = gems;
+    //this.products = gems;
     $scope.products = [];
     $scope.product = {};
 
@@ -24,7 +24,7 @@
       });
     };
 
-    $scope.index = function(){
+    $scope.create = function(){
       $http.post('/products', $scope.product)
       .success(function(data){
         $scope.products.unshift(data);
@@ -53,12 +53,18 @@
       this.review = {};
     };
   });
+
+  /*
   var gems = [
   {
     name: "Ruby",
-    price: 100
+    price: 150,
+    description: " ... ",
+    canPurchase: true,
+    soldOut: false,
   }
   ]
+  */
 /*
   var gems = [
     {
