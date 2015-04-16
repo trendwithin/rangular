@@ -31,11 +31,16 @@
         $scope.product = {};
       });
     };
-     $scope.update = function(item){
-      $http.patch('/product/id', $scope.product)
-      .success(function(data){
-        $scope.products = data;
-        $scope.product = {};
+     $scope.update = function(product, tab){
+      console.log(tab);
+      $http.patch('/products/' + product.id, product)
+      .success(function(data, status){
+        tab.setTab(1)
+      })
+      .error(function(data, status){
+        console.log(data);
+        console.log(status);
+        $scope.errors.push(status);
       });
     };
 

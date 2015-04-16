@@ -9,6 +9,9 @@
    <li ng-class="{ active:panel.isSelected(3) }">
      <a href ng-click="panel.selectTab(3)">Reviews</a>
    </li>
+    <li ng-class="{ active:panel.isSelected(4) }">
+     <a href ng-click="panel.selectTab(4)">Update</a>
+   </li>
   </ul>
     {{tab}}
     <button ng-show="product.canPurchase"> Add to Cart </button>
@@ -17,9 +20,6 @@
       <product-title></product-title>
       <form name="deleteProduct">
         <input type="submit" value="delete" ng-click="remove(product)">
-      </form>
-      <form name="updateProduct">
-        <input type="submit" value="update" ng-click="update(product)">
       </form>
     </div>
     <div class="panel" ng-show="panel.isSelected(2)">
@@ -39,5 +39,17 @@
         </li>
       </ul>
       <product-form></product-form>
+    </div>
+
+    <div class="panel" ng-show="panel.isSelected(4)">
+      <form name="updateProduct">
+        <label for="name">
+          <input type="text" name="name" ng-model="product.name" />
+        </label><br />
+        <label for="price">
+          <input type="text" name="price" ng-model="product.price" />
+        </label><br />
+          <input type="submit" value="update" ng-click="update(product, tab)">
+    </form>
     </div>
 </section>
