@@ -9,7 +9,7 @@
   }])
 
   app.controller('StoreController', [ '$http', '$scope', function($http, $scope) {
-    //this.products = gems;
+    this.products = gems;
     $scope.products = [];
     $scope.product = {};
 
@@ -54,7 +54,7 @@
     };
   });
 
-  /*
+
   var gems = [
   {
     name: "Ruby",
@@ -62,9 +62,14 @@
     description: " ... ",
     canPurchase: true,
     soldOut: false,
+    images: [
+      {
+        full: '<%= asset_path "ruby.jpeg" %>'
+      }
+    ]
   }
   ]
-  */
+
 /*
   var gems = [
     {
