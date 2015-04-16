@@ -9,13 +9,13 @@
   }])
 
   app.controller('StoreController', [ '$http', '$scope', function($http, $scope) {
-    this.products = gems;
-    $scope.products = [];
+    //this.products = gems;
+    $scope.products = [ ];
     $scope.product = {};
 
     $scope.index = function(){
       $http.get('/products')
-      .success(function(data, status){
+      .success(function(data){
         $scope.products = data;
       })
       .error(function(data, status){
@@ -55,22 +55,7 @@
   });
 
 
-  var gems = [
-  {
-    name: "Ruby",
-    price: 150,
-    description: " ... ",
-    canPurchase: true,
-    soldOut: false,
-    images: [
-      {
-        full: '<%= asset_path "ruby.jpeg" %>'
-      }
-    ]
-  }
-  ]
 
-/*
   var gems = [
     {
       name: "Ruby",
@@ -105,5 +90,5 @@
       canPurchase: true,
     },
   ]
-*/
+
 })();
