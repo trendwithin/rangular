@@ -1,0 +1,116 @@
+//= require directives
+
+(function() {
+  var app = angular.module('store', ['store-directives']);
+
+  app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] =
+    $('meta[name=csrf-token]').attr('content');
+  }])
+
+  app.controller('StoreController', [ '$http', '$scope', function($http, $scope) {
+    //this.products = gems;
+    $scope.products = [ ];
+    $scope.product = {};
+
+    $scope.index = function(){
+      $http.get('/products')
+      .success(function(data){
+        $scope.products = data;
+      })
+      .error(function(data, status){
+        console.log(status);
+        $scope.errors.push(status);
+      });
+    };
+
+    $scope.create = function(){
+      $http.post('/products', $scope.product)
+      .success(function(data){
+        $scope.products.unshift(data);
+        $scope.product = {};
+      });
+    };
+     $scope.update = function(product, tab){
+      console.log(tab);
+      $http.patch('/products/' + product.id, product)
+      .success(function(data, status){
+        tab.setTab(1)
+      })
+      .error(function(data, status){
+        console.log(data);
+        console.log(status);
+        $scope.errors.push(status);
+      });
+    };
+
+    $scope.remove = function(item) {
+      $http.delete('/products/' + item.id)
+        .success(function(){
+          var index = $scope.products.indexOf(item);
+          $scope.products.splice(index, 1);
+        })
+        .error(function(data, status){
+          console.log(status);
+          $scope.errors.push(status);
+        });
+    };
+  }]);
+
+  app.controller('PanelController', function() {
+    this.tab = 1;
+
+    this.selectTab = function(setTab){
+      this.tab = setTab;
+    };
+
+    this.isSelected = function(checkTab){
+      return this.tab === checkTab;
+    };
+  });
+
+  app.controller("ReviewController", function() {
+    this.review = {};
+
+    this.addReview = function(product) {
+      product.reviews.push(this.review);
+      this.review = {};
+    };
+  });
+
+  var gems = [
+    {
+      name: "Ruby",
+      price: 2.95,
+      description: ". . .",
+      canPurchase: true,
+      soldOut: false,
+      images: [
+       {
+        full: '<%= asset_path "ruby.jpeg" %>'
+       }
+      ],
+      reviews: [
+        {
+          stars: 5,
+          body: "I love this gem!",
+          author: "joe@example.org",
+          createdOn: 1397490980837
+        },
+        {
+          stars: 1,
+          body: "This gem sucks.",
+          author: "tim@example.org",
+          createdOn: 1397490980837
+        }
+      ]
+    },
+    {
+      name: "Pentagonal Gem",
+      price: 5.95,
+      description: ". . .",
+      canPurchase: true,
+    },
+  ]
+
+})();

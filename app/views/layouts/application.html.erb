@@ -1,13 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="store">
 <head>
   <title>Rangular</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <section ng-controller="StoreController as store" ng-init="index()">
+    <form name="newProduct" ng-submit="create()">
+      <label for="name">
+        <input type="text" name="name" ng-model="product.name" />
+      </label><br />
+      <label for="price">
+        <input type="text" name="price" ng-model="product.price" />
+      </label><br />
+        <input type="submit">
+    </form>
 
-<%= yield %>
-
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="product in products">
+        <h3  ng-include="product-title.html">
+        </h3>
+        <img ng-src="{{product.images[0].full}}" />
+        <section ng-controller="PanelController as panel">
+          <product-panels ng-controller="PanelController as panels">
+          <product-panels-test ng-controller="PanelController as panels">
+          </product-panels-test>
+          </product-panels>
+        </section>
+      </li>
+    </ul>
+  </section>
 </body>
 </html>
