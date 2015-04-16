@@ -31,7 +31,7 @@
         $scope.product = {};
       });
     };
-     $scope.update = function(){
+     $scope.update = function(item){
       $http.patch('/product/id', $scope.product)
       .success(function(data){
         $scope.products = data;
@@ -40,9 +40,15 @@
     };
 
     $scope.remove = function(item) {
-      var index = $scope.products.indexOf(item);
-      $scope.products.splice(index, 1);
-      $http.delete('/products/' + item.id);
+      $http.delete('/products/' + item.id)
+        .success(function(){
+          var index = $scope.products.indexOf(item);
+          $scope.products.splice(index, 1);
+        })
+        .error(function(data, status){
+          console.log(status);
+          $scope.errors.push(status);
+        });
     };
   }]);
 
@@ -66,8 +72,6 @@
       this.review = {};
     };
   });
-
-
 
   var gems = [
     {
