@@ -7,9 +7,31 @@
     $httpProvider.defaults.headers.common['X-CSRF-Token'] =
     $('meta[name=csrf-token]').attr('content');
   }])
-  app.controller('StoreController', function() {
+
+  app.controller('StoreController', [ '$http', '$scope', function($http, $scope) {
     this.products = gems;
-  });
+    $scope.products = [];
+    $scope.product = {};
+
+    $scope.index = function(){
+      $http.get('/products')
+      .success(function(data, status){
+        $scope.products = data;
+      })
+      .error(function(data, status){
+        console.log(status);
+        $scope.errors.push(status);
+      });
+    };
+
+    $scope.index = function(){
+      $http.post('/products', $scope.product)
+      .success(function(data){
+        $scope.products.unshift(data);
+        $scope.product = {};
+      });
+    };
+  }]);
 
   app.controller('PanelController', function() {
     this.tab = 1;
