@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
 
   def update
     if product.update(product_params)
-      render json: product, status 201, location: product
+      render json: product, status: 201, location: product
     else
       render json: product.errors, status: 422
     end

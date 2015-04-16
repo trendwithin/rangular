@@ -15,6 +15,9 @@
 
     <div class="panel" ng-show="panel.isSelected(1)">
       <product-title></product-title>
+      <form name="deleteProduct" ng-submit="destroy()">
+        <input type="submit" value="delete" ng-click="remove(product)">
+      </form>
     </div>
     <div class="panel" ng-show="panel.isSelected(2)">
       <h4>Specifications</h4>

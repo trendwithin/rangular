@@ -31,6 +31,19 @@
         $scope.product = {};
       });
     };
+     $scope.update = function(){
+      $http.patch('/product/id', $scope.product)
+      .success(function(data){
+        $scope.products = data;
+        $scope.product = {};
+      });
+    };
+
+    $scope.remove = function(item) {
+      var index = $scope.products.indexOf(item);
+      $scope.products.splice(index, 1);
+      $http.delete('/products/' + item.id);
+    };
   }]);
 
   app.controller('PanelController', function() {
